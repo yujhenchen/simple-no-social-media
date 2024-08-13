@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
         title: 'Namer App',
         theme: ThemeData(
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
+          colorScheme: ColorScheme.fromSeed(
+              seedColor: Colors.blueGrey, brightness: Brightness.dark),
         ),
         home: MyHomePage(),
       ),
@@ -38,12 +39,16 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
+    var pair = appState.current;
 
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text('A random idea:'),
-          Text(appState.current.asLowerCase),
+          BigCard(
+              pair:
+                  pair), // make sure a widget only takes the param that it really needs
           ElevatedButton(
             onPressed: () {
               appState.getNext();
@@ -51,6 +56,32 @@ class MyHomePage extends StatelessWidget {
             child: Text('Next'),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class BigCard extends StatelessWidget {
+  const BigCard({
+    super.key,
+    required this.pair,
+  });
+
+  final WordPair pair;
+
+  @override
+  Widget build(BuildContext context) {
+    var theme = Theme.of(context); // is the theme: ThemeData
+    var style = theme.textTheme.displayLarge!.copyWith(
+      color: theme.colorScheme.onPrimary,
+    );
+
+    return Card(
+      color: theme.colorScheme.primary,
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Text(pair.asUpperCase,
+            style: style, semanticsLabel: pair.asPascalCase),
       ),
     );
   }
