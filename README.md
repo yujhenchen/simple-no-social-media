@@ -33,3 +33,8 @@ A problem was found with the configuration of task ':app:processDebugResources' 
 android\app\build.gradle
 
 Update `targetSdk` to the correct version this is installed on the computer under the path `C:\Users\user\AppData\Local\Android\sdk\platforms\`. For example, the one that exists in my local directory is `C:\Users\user\AppData\Local\Android\sdk\platforms\android-35\android.jar`, change the value `targetSdk` to be 35: `targetSdk =  35`
+
+
+
+## Learning resources
+- https://www.youtube.com/playlist?list=PLjxrf2q8roU3wk7CDw4RfV3mEwOJbjx1k
